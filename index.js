@@ -6,6 +6,10 @@
 // - Words are separated by spaces, and the sentence may contain leading or trailing spaces.
 // - Consider only spaces as word separators (no punctuation splitting).
 export function reverseWords(sentence) {
+    const sentenceParticles = sentence.split(" ");
+    sentenceParticles.reverse();
+    let reversedSentence = sentenceParticles.join();
+    return reversedSentence;
 }
 
 
@@ -20,7 +24,20 @@ export function reverseWords(sentence) {
 // - The function should not count punctuation as part of the words.
 // - Return the result with words in lowercase.
 export function wordFrequency(text) {
-}
+        let lowerCaseText = text.toLowerCase();
+        let wordsOfText = lowerCaseText.replace(/[.,\/#?!$%\^&\*;:{}=\-_`~()]/g, "").split(/\s+/);
+        const wordCount = {};
+         for (let word of wordsOfText) {
+            if (wordCount.hasOwnProperty(word)) {
+                wordCount[word]++;
+            } else {
+                wordCount[word] = 1;
+            }
+        }
+    
+        return wordCount;
+    
+    }
 
 // Task: Top N Frequent Words
 // Write a function `topNFrequentWords(text, n)` that finds the top `n` most frequent words in a given text.
@@ -32,4 +49,17 @@ export function wordFrequency(text) {
 // - Words are separated by spaces, and the text may contain punctuation.
 // - Ignore punctuation, and consider only alphabetic characters for word separation.
 export function topNFrequentWords(text, n) {
+    let lowerCaseText = text.toLowerCase();
+    let wordsOfText = lowerCaseText.replace(/[.,\/#?!$%\^&\*;:{}=\-_`~()]/g, "").split(/\s+/);
+    let frequencyOfWords = {};
+    wordsOfText.forEach (word => {
+        if (word) {
+            frequencyOfWords[word] = (frequencyOfWords[word] || 0) +1;
+        }
+    })
+    let result = [];
+    for (let word in frequencyOfWords) {
+        result.push([word, frequencyOfWords[word]]);
+    }
+    return result;    
 }
